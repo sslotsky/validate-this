@@ -4,7 +4,7 @@
 
 ## Defining a Custom Validation
 
-In the most simple case, a rule accepts a `value` and returns a string if an only if the `value` is invalid.
+In the most simple case, a rule accepts a `value` and returns a string if and only if the `value` is invalid.
 
 ```javascript
 import email from 'email-validator'
