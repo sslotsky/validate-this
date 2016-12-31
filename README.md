@@ -78,7 +78,7 @@ function validate(values) {
 
 Or if there's a nested array:
 
-```
+```javascript
 const formData = {
   contacts: [{
     name: 'bob',
