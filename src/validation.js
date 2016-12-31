@@ -1,38 +1,46 @@
-function required(value) {
-  if (!value) {
-    return 'required'
-  }
-}
+import * as rules from './rules'
 
 const customRules = {}
 
-export function defineValidator(name, rule) {
-  customRules[name] = rule
+export function defineValidator({ name, rule, higherOrder = false }) {
+  customRules[name] = { rule, higherOrder }
 }
+
+defineValidator({ name: 'require', rule: rules.required })
+
+defineValidator({
+  name: 'matches',
+  higherOrder: true,
+  rule: rules.matches
+})
 
 export default function validator(values, validations) {
   const errors = {}
 
   function validateFields(rule, fields) {
     fields.forEach(f => {
-      const error = rule(values[f])
+      const error = rule(values[f], values)
       if (error) {
         errors[f] = (errors[f] || []).concat(error)
       }
     })
   }
 
-  const customValidator = Object.keys(customRules).reduce((v, name) => ({
-    [name]: (...fieldNames) => {
-      validateFields(customRules[name], fieldNames)
-    },
-    ...v
-  }), {})
+  const customValidator = Object.keys(customRules).reduce((v, name) => {
+    const config = customRules[name]
+    const validation = config.higherOrder ?
+      (...args) => (...fieldNames) =>
+        validateFields(config.rule(...args), fieldNames) :
+      (...fieldNames) =>
+        validateFields(config.rule, fieldNames)
+
+    return {
+      [name]: validation,
+      ...v
+    }
+  }, {})
 
   const v = {
-    require: (...fieldNames) => {
-      validateFields(required, fieldNames)
-    },
     validateChild: (field, childValidations) => {
       errors[name] = validator(values[field], childValidations)
     },

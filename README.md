@@ -4,15 +4,48 @@
 
 ## Defining a Custom Validation
 
+In the most simple case, a rule accepts a `value` and returns a string if an only if the `value` is invalid.
+
 ```javascript
 import email from 'email-validator'
 import { defineValidator } from 'validate-this'
 
-defineValidator('email', value => {
-  if (value && !email.validate(value)) {
-    return 'email_invalid'
+defineValidator({
+  name: 'email',
+  rule: value => {
+    if (value && !email.validate(value)) {
+      return 'email_invalid'
+    }
   }
 })
+```
+
+For more complex cases, a higher order rule can be defined. The example below is built into
+`validate-this` but makes a good demonstration.
+
+```javascript
+defineValidator({
+  name: 'matches',
+  higherOrder: true,
+  rule: fieldName => (val, values) => {
+    if (val !== values[fieldName]) {
+      return 'mismatch'
+    } 
+  }
+})
+```
+
+This will validate that one field matches another. Here's a validation function that uses this
+validator:
+
+```javascript
+function validate(values) {
+  return validator(values, v => {
+    v.require('username', 'email', 'password', 'confirm')
+    v.email('email')
+    v.matches('password')('confirm')
+  })
+}
 ```
 
 ## Validating Form Data
