@@ -42,10 +42,10 @@ export default function validator(values, validations) {
 
   const v = {
     validateChild: (field, childValidations) => {
-      errors[name] = validator(values[field], childValidations)
+      errors[field] = validator(values[field], childValidations)
     },
     validateChildren: (field, childValidations) => {
-      errors[name] = valus[field].map(v => validator(v, childValidations))
+      errors[field] = values[field].map(v => validator(v, childValidations))
     },
     ...customValidator
   }
