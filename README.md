@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/sslotsky/validate-this.svg?branch=master)](https://travis-ci.org/sslotsky/validate-this)
+[![Build Status](https://travis-ci.org/sslotsky/validate-this.svg?branch=master)](https://travis-ci.org/sslotsky/validate-this)
 
 
 # validate-this
