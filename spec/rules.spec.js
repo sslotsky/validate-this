@@ -31,3 +31,17 @@ describe('matches', () => {
     })
   })
 })
+
+describe('numeric', () => {
+  context('when value is numeric', () => {
+    it('returns nothing', () => {
+      expect(rules.numeric('4')).toBe(undefined)
+    })
+  })
+
+  context('when value is not numeric', () => {
+    it('returns an error', () => {
+      expect(rules.numeric('a')).toEqual('expected_numeric')
+    })
+  })
+})

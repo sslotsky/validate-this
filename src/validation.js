@@ -7,6 +7,7 @@ export function defineValidator({ name, rule, higherOrder = false }) {
 }
 
 defineValidator({ name: 'require', rule: rules.required })
+defineValidator({ name: 'numeric', rule: rules.numeric })
 
 defineValidator({
   name: 'matches',

@@ -12,3 +12,9 @@ export function matches(fieldName) {
   }
 }
 
+export function numeric(value) {
+  debugger
+  if (value && !/\d+/.test(value)) {
+    return 'expected_numeric'
+  }
+}
