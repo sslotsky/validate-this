@@ -2,6 +2,38 @@
 
 `validate-this` is a validation library that applies validation rules to structured form data. It also allows you to define your own validation rules.
 
+## Validating Form Data
+
+Imagining that we have structured form data that looks like:
+
+```javascript
+const formData = {
+  username: '',
+  email: 'bob'
+}
+```
+
+Then we could pass that object into the function below:
+
+```javascript
+import { validator } from 'validate-this'
+
+function validate(values) {
+  return validator(values, v => {
+    v.require('username', 'email') // the require() validation is built into the package
+    v.email('email')               // the email() validation was defined above as a custom validation
+  })
+}
+```
+
+Calling the function with the `formData` we defined previously will return an `errors` object like this:
+
+```javascript
+{
+  username: ['required'],
+  email: ['email_invalid']
+}
+```
 ## Defining a Custom Validation
 
 In the most simple case, a rule accepts a `value` and returns a string if and only if the `value` is invalid.
@@ -45,39 +77,6 @@ function validate(values) {
     v.email('email')
     v.matches('password')('confirm')
   })
-}
-```
-
-## Validating Form Data
-
-Imagining that we have structured form data that looks like:
-
-```javascript
-const formData = {
-  username: '',
-  email: 'bob'
-}
-```
-
-Then we could pass that object into the function below:
-
-```javascript
-import { validator } from 'validate-this'
-
-function validate(values) {
-  return validator(values, v => {
-    v.require('username', 'email') // the require() validation is built into the package
-    v.email('email')               // the email() validation was defined above as a custom validation
-  })
-}
-```
-
-Calling the function with the `formData` we defined previously will return an `errors` object like this:
-
-```javascript
-{
-  username: ['required'],
-  email: ['email_invalid']
 }
 ```
 
