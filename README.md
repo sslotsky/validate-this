@@ -21,7 +21,7 @@ import { validator } from 'validate-this'
 function validate(values) {
   return validator(values, v => {
     v.require('username', 'email') // the require() validation is built into the package
-    v.email('email')               // the email() validation was defined above as a custom validation
+    v.email('email')               // the email() validation was defined below as a custom validation, read on!
   })
 }
 ```
