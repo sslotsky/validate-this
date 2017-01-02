@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/sslotsky/validate-this.svg?branch=master)](https://travis-ci.org/sslotsky/validate-this)
-[![Build Status](https://travis-ci.org/sslotsky/validate-this.svg?branch=master)](https://travis-ci.org/sslotsky/validate-this)
+[![codecov](https://codecov.io/gh/sslotsky/validate-this/branch/master/graph/badge.svg)](https://codecov.io/gh/sslotsky/validate-this)
 
 
 # validate-this
