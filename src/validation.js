@@ -2,16 +2,15 @@ import * as rules from './rules'
 
 const customRules = {}
 
-export function defineValidator({ name, rule, higherOrder = false }) {
-  customRules[name] = { rule, higherOrder }
+export function defineValidator({ name, rule }) {
+  customRules[name] = { rule }
 }
 
-defineValidator({ name: 'require', rule: rules.required })
-defineValidator({ name: 'numeric', rule: rules.numeric })
+defineValidator({ name: 'required', rule: rules.required })
+defineValidator({ name: 'isNumeric', rule: rules.numeric })
 
 defineValidator({
   name: 'matches',
-  higherOrder: true,
   rule: rules.matches
 })
 
@@ -27,19 +26,20 @@ export default function validator(values, validations) {
     })
   }
 
-  const customValidator = Object.keys(customRules).reduce((v, name) => {
-    const config = customRules[name]
-    const validation = config.higherOrder ?
-      (...args) => (...fieldNames) =>
-        validateFields(config.rule(...args), fieldNames) :
-      (...fieldNames) =>
-        validateFields(config.rule, fieldNames)
+  function customValidator(fields) {
+    return Object.keys(customRules).reduce((v, name) => {
+      const config = customRules[name]
+      const validation = (...args) => {
+        const rule = args.length ? config.rule(...args) : config.rule
+        return validateFields(rule, fields)
+      }
 
-    return {
-      [name]: validation,
-      ...v
-    }
-  }, {})
+      return {
+        [name]: validation,
+        ...v
+      }
+    }, {})
+  }
 
   const v = {
     validateChild: (field, childValidations) => {
@@ -48,7 +48,7 @@ export default function validator(values, validations) {
     validateChildren: (field, childValidations) => {
       errors[field] = values[field].map(v => validator(v, childValidations))
     },
-    ...customValidator
+    validate: (...fields) => customValidator(fields)
   }
 
   validations(v, values)

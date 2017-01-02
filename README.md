@@ -24,8 +24,8 @@ import { validator } from 'validate-this'
 
 function validate(values) {
   return validator(values, v => {
-    v.require('username', 'email') // the require() validation is built into the package
-    v.email('email')               // the email() validation is defined below as a custom validation, read on!
+    v.validate('username', 'email').required() // the required() validation is built into the package
+    v.validate('email').isValidEmail()         // the email() validation is defined below as a custom validation, read on!
   })
 }
 ```
@@ -62,7 +62,6 @@ For more complex cases, a higher order rule can be defined. The example below is
 ```javascript
 defineValidator({
   name: 'matches',
-  higherOrder: true,
   rule: fieldName => (val, values) => {
     if (val !== values[fieldName]) {
       return 'mismatch'
@@ -77,9 +76,9 @@ validator:
 ```javascript
 function validate(values) {
   return validator(values, v => {
-    v.require('username', 'email', 'password', 'confirm')
-    v.email('email')
-    v.matches('password')('confirm')
+    v.validate('username', 'email', 'password', 'confirm').required()
+    v.validate('email').isValidEmail()
+    v.validate('confirm').matches('password')
   })
 }
 ```
@@ -106,7 +105,7 @@ import { validator } from 'validate-this'
 function validate(values) {
   return validator(values, v => {
     v.validateChild('address', av => {
-      a.require('street')
+      av.validate('street').required()
     })
   })
 }
@@ -131,7 +130,7 @@ import { validator } from 'validate-this'
 function validate(values) {
   return validator(values, v => {
     v.validateChildren('contacts', cv => {
-      cv.require('name', 'email')
+      cv.validate('name', 'email').required()
     })
   })
 }
