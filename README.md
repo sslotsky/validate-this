@@ -76,8 +76,8 @@ Calling the function with the `formData` we defined previously will return an `e
 
 ```javascript
 {
-  username: 'required',
-  email: 'email_invalid'
+  username: ['required'],
+  email: ['email_invalid']
 }
 ```
 
