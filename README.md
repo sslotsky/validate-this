@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/sslotsky/validate-this.svg?branch=master)](https://travis-ci.org/sslotsky/validate-this)
+
+
 # validate-this
 
 `validate-this` is a validation library that applies validation rules to structured form data. It also allows you to define your own validation rules.
