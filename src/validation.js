@@ -19,9 +19,9 @@ export default function validator(values, validations, translator = message => m
 
   function validateFields(rule, fields) {
     fields.forEach(f => {
-      const error = translator(rule(values[f], values), f)
+      const error = rule(values[f], values)
       if (error) {
-        errors[f] = (errors[f] || []).concat(error)
+        errors[f] = (errors[f] || []).concat(translator(error, f))
       }
     })
   }
