@@ -24,6 +24,17 @@ describe('validation', () => {
       })
     })
 
+    context('with a custom translator', () => {
+      const translator = (message, field) => `${field}: ${message}`
+      const errors = validator({ name: null }, v => {
+        v.validate('name').required()
+      }, translator)
+
+      it('returns a translated message', () => {
+        expect(errors.name).toEqual(translator('required', 'name'))
+      })
+    })
+
     describe('matches', () => {
       context('when values match', () => {
         const errors = validator({ password: 'foo', confirm: 'foo' }, v => {

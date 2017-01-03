@@ -14,12 +14,12 @@ defineValidator({
   rule: rules.matches
 })
 
-export default function validator(values, validations) {
+export default function validator(values, validations, translator = message => message) {
   const errors = {}
 
   function validateFields(rule, fields) {
     fields.forEach(f => {
-      const error = rule(values[f], values)
+      const error = translator(rule(values[f], values), f)
       if (error) {
         errors[f] = (errors[f] || []).concat(error)
       }
