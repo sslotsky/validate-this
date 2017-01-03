@@ -16,6 +16,16 @@
     "type": "git",
     "url": "git+https://github.com/sslotsky/validate-this.git"
   },
+  "nyc": {
+    "exclude": [
+      "examples",
+      "build"
+    ],
+    "reporter": [
+      "lcov",
+      "text-summary"
+    ]
+  },
   "keywords": [
     "form",
     "forms",
