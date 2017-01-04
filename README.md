@@ -72,7 +72,7 @@ import email from 'email-validator'
 import { defineValidator } from 'validate-this'
 
 defineValidator({
-  name: 'email',
+  name: 'isValidEmail',
   rule: value => {
     if (value && !email.validate(value)) {
       return 'email_invalid'
