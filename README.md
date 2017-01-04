@@ -40,6 +40,31 @@ Calling the function with the `formData` we defined previously will return an `e
 ```
 ## Defining a Custom Validation
 
+There are two ways to do your own validations: by using the `satisfies` validation,
+or by using `defineValidator`.
+
+### .satisfies(rule)
+
+Call this with your own validation rule. Example:
+
+```javascript
+import email from 'email-validator'
+
+function isValidEmail(value) {
+  if (value && !email.validate(value)) {
+    return 'email_invalid'
+  }
+}
+
+function validate(values) {
+  return validator(values, v => {
+    v.validate('email').satisfies(isValidEmail)
+  })
+}
+```
+
+### defineValidator(config)
+
 In the most simple case, a rule accepts a `value` and returns a string if and only if the `value` is invalid.
 
 ```javascript
@@ -133,5 +158,19 @@ function validate(values) {
       cv.validate('name', 'email').required()
     })
   })
+}
+```
+
+## Message translation
+
+A third argument can be provided to the `validator` function that will allow you to
+translate error messages using something like `I18n`. Example:
+
+```javascript
+function validate(values) {
+  return validator(values, v => {
+    v.validate('username', 'password', 'confirm').required()
+    v.validate('confirm').matches('password')
+  }, (message, field) => I18n.t(`forms.newUser.${field}.${message}`))
 }
 ```

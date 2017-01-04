@@ -38,7 +38,9 @@ export default function validator(values, validations, translator = message => m
         [name]: validation,
         ...v
       }
-    }, {})
+    }, {
+      satisfies: rule => validateFields(rule, fields)
+    })
   }
 
   const v = {

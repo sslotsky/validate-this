@@ -2,3 +2,4 @@ node_modules/
 *.sw*
 .nyc_output/
 *.log
+coverage/

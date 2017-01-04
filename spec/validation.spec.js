@@ -31,7 +31,18 @@ describe('validation', () => {
       }, translator)
 
       it('returns a translated message', () => {
-        expect(errors.name).toEqual(translator('required', 'name'))
+        expect(errors.name).toInclude(translator('required', 'name'))
+      })
+    })
+
+    describe('satisfies', () => {
+      it('populates errors based on a custom rule', () => {
+        const rule = () => 'error'
+        const errors = validator({ name: 'invalid' }, v => {
+          v.validate('name').satisfies(rule)
+        })
+
+        expect(errors.name).toInclude('error')
       })
     })
 
