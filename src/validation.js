@@ -14,7 +14,7 @@ defineValidator({
   rule: rules.matches
 })
 
-export default function validator(values, validations, translator = message => message) {
+export default function validator(values = {}, validations, translator = message => message) {
   const errors = {}
 
   function validateFields(rule, fields) {
