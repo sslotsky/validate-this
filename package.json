@@ -1,6 +1,6 @@
 {
   "name": "validate-this",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Easily validate deep form structures using both premade and custom validation rules.",
   "main": "lib/index.js",
   "scripts": {
