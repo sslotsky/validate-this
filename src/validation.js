@@ -52,11 +52,8 @@ export default function validator(values = {}, validations, translator = message
       }
     },
     validateChildren: (field, childValidations) => {
-      const childErrors = values[field].map(v => validator(v, childValidations)).filter(e =>
-        Object.keys(e).length > 0
-      )
-
-      if (childErrors.length) {
+      const childErrors = values[field].map(v => validator(v, childValidations))
+      if (childErrors.some(e => Object.keys(e).length > 0)) {
         errors[field] = childErrors
       }
     },
