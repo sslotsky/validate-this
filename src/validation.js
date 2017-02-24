@@ -45,14 +45,14 @@ export default function validator(values = {}, validations, translator = message
 
   const v = {
     validateChild: (field, childValidations) => {
-      const childErrors = validator(values[field], childValidations)
+      const childErrors = validator(values[field] || {}, childValidations)
 
       if (Object.keys(childErrors).length > 0) {
         errors[field] = childErrors
       }
     },
     validateChildren: (field, childValidations) => {
-      const childErrors = values[field].map(v => validator(v, childValidations))
+      const childErrors = (values[field] || []).map(v => validator(v, childValidations))
       if (childErrors.some(e => Object.keys(e).length > 0)) {
         errors[field] = childErrors
       }

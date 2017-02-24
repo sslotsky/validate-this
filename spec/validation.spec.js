@@ -69,6 +69,20 @@ describe('validation', () => {
     })
 
     describe('validateChild', () => {
+      context('when a child object does not exist', () => {
+        const values = {}
+
+        it('populates child errors', () => {
+          const errors = validator(values, v => {
+            v.validateChild('user', cv => {
+              cv.validate('name').required()
+            })
+          })
+
+          expect(errors.user.name).toExist()
+        })
+      })
+
       context('when a child object has no errors', () => {
         const values = {
           user: {
@@ -107,6 +121,20 @@ describe('validation', () => {
     })
 
     describe('validateChildren', () => {
+      context('when the child array does not exist', () => {
+        const values = {}
+
+        it('does not populate errors', () => {
+          const errors = validator(values, v => {
+            v.validateChildren('contacts', cv => {
+              cv.validate('name').required()
+            })
+          })
+
+          expect(errors.contacts).toNotExist()
+        })
+      })
+
       context('when a child array has no errors', () => {
         const values = {
           contacts: [{
