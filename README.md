@@ -43,9 +43,9 @@ Calling the function with the `formData` we defined previously will return an `e
 There are two ways to do your own validations: by using the `satisfies` validation,
 or by using `defineValidator`.
 
-### .satisfies(rule)
+### .satisfies(...rules)
 
-Call this with your own validation rule. Example:
+Call this with your own validation rule(s). Example:
 
 ```javascript
 import email from 'email-validator'
@@ -59,6 +59,32 @@ function isValidEmail(value) {
 function validate(values) {
   return validator(values, v => {
     v.validate('email').satisfies(isValidEmail)
+  })
+}
+```
+
+Or with multiple rules:
+
+```javascript
+function greaterThan(n) {
+  return value => {
+    if (value <= n) {
+      return 'too_small'
+    }
+  }
+}
+
+function lessThan(n) {
+  return value => {
+    if (value >= n) {
+      return 'too_big'
+    }
+  }
+}
+
+function validate(values) {
+  return validator(values, v => {
+    v.validate('age').satisfies(greaterThan(17), lessThan(26))
   })
 }
 ```
