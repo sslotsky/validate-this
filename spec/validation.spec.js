@@ -44,6 +44,16 @@ describe('validation', () => {
 
         expect(errors.name).toInclude('error')
       })
+
+      it('accepts multiple rules', () => {
+        const rule1 = () => 'error1'
+        const rule2 = () => 'error2'
+        const errors = validator({ name: 'invalid' }, v => {
+          v.validate('name').satisfies(rule1, rule2)
+        })
+
+        expect(errors.name).toEqual(['error1', 'error2'])
+      })
     })
 
     describe('matches', () => {

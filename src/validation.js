@@ -17,12 +17,14 @@ defineValidator({
 export default function validator(values = {}, validations, translator = message => message) {
   const errors = {}
 
-  function validateFields(rule, fields) {
+  function validateFields(rules, fields) {
     fields.forEach(f => {
-      const error = rule(values[f], values)
-      if (error) {
-        errors[f] = (errors[f] || []).concat(translator(error, f))
-      }
+      rules.forEach(rule => {
+        const error = rule(values[f], values)
+        if (error) {
+          errors[f] = (errors[f] || []).concat(translator(error, f))
+        }
+      })
     })
   }
 
@@ -31,7 +33,7 @@ export default function validator(values = {}, validations, translator = message
       const config = customRules[name]
       const validation = (...args) => {
         const rule = args.length ? config.rule(...args) : config.rule
-        return validateFields(rule, fields)
+        return validateFields([rule], fields)
       }
 
       return {
@@ -39,7 +41,7 @@ export default function validator(values = {}, validations, translator = message
         ...v
       }
     }, {
-      satisfies: rule => validateFields(rule, fields)
+      satisfies: (...rules) => validateFields(rules, fields)
     })
   }
 
