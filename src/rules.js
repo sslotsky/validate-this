@@ -13,7 +13,7 @@ export function matches(fieldName) {
 }
 
 export function numeric(value) {
-  if (value && !/\d+/.test(value)) {
+  if (value && !/^\d+$/.test(value)) {
     return 'expected_numeric'
   }
 }

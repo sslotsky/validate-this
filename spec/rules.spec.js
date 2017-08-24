@@ -41,7 +41,7 @@ describe('numeric', () => {
 
   context('when value is not numeric', () => {
     it('returns an error', () => {
-      expect(rules.numeric('a')).toEqual('expected_numeric')
+      expect(rules.numeric('a4')).toEqual('expected_numeric')
     })
   })
 })
