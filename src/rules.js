@@ -12,8 +12,8 @@ export function matches(fieldName) {
   }
 }
 
-export function numeric(value) {
-  if (value && !/^\d+$/.test(value)) {
+export function numeric(n) {
+  if (isNaN(parseFloat(n)) || !isFinite(n)) {
     return 'expected_numeric'
   }
 }

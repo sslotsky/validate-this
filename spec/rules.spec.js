@@ -33,9 +33,15 @@ describe('matches', () => {
 })
 
 describe('numeric', () => {
-  context('when value is numeric', () => {
+  context('when value is an integer', () => {
     it('returns nothing', () => {
       expect(rules.numeric('4')).toBe(undefined)
+    })
+  })
+
+  context('when value is a float', () => {
+    it('returns nothing', () => {
+      expect(rules.numeric('4.0')).toBe(undefined)
     })
   })
 
