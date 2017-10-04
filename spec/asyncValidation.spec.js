@@ -96,7 +96,7 @@ describe('asyncValidation', () => {
           ))
         )).then((errors) => {
           expect(errors.contacts).toNotExist()
-        });
+        })
       })
     })
 
@@ -132,7 +132,7 @@ describe('asyncValidation', () => {
           ))
         )).then((errors) => {
           expect(errors.contacts[0].name).toExist()
-        });
+        })
       })
     })
   })

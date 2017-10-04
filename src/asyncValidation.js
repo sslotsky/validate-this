@@ -31,7 +31,7 @@ export function validator(model, validations) {
     })
   }
   v.validateChildren = ({ field, drill = () => model[field] }, childValidations) => {
-    const children = (drill(model, field) || []).map(v => validator(v, childValidations));
+    const children = (drill(model, field) || []).map(v => validator(v, childValidations))
     return Promise.all(children).then((childErrors) => {
       if (childErrors.some(e => Object.keys(e).length > 0)) {
         errors[field] = childErrors
