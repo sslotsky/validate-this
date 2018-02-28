@@ -1,5 +1,7 @@
 {
   "parser": "babel-eslint",
+  "extends": ["prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "no-debugger": "error",
     "import/prefer-default-export": ["off"],
