@@ -4,7 +4,6 @@
   "description": "Easily validate deep form structures using both premade and custom validation rules.",
   "main": "lib/index.js",
   "scripts": {
-    "spec": "mocha './spec/**/*.spec.js' --compilers js:babel-register --recursive",
     "spec-coverage": "nyc --require babel-core/register mocha --recursive './spec/**/*.spec.js'",
     "lint": "eslint ./src/** ./spec/**/*",
     "test": "npm run lint && npm run spec-coverage",
@@ -49,7 +48,6 @@
     "eslint-plugin-import": "^2.2.0",
     "expect": "^1.20.2",
     "mocha": "^6.1.4",
-    "nyc": "^14.1.1",
-    "webpack": "^1.14.0"
+    "nyc": "^14.1.1"
   }
 }
