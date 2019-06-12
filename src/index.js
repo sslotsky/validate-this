@@ -1,2 +1,2 @@
-export validator, { defineValidator } from './validation'
-export { validator as asyncValidator } from './asyncValidation'
+export validator, { defineValidator } from "./validation";
+export { validator as asyncValidator } from "./asyncValidation";

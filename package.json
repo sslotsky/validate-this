@@ -7,13 +7,31 @@
     "spec-coverage": "nyc --require babel-core/register mocha --recursive './spec/**/*.spec.js'",
     "lint": "eslint ./src/** ./spec/**/*",
     "test": "npm run lint && npm run spec-coverage",
-    "compile": "babel -d lib/ src/"
+    "compile": "pack build"
   },
   "author": "Sam Slotsky",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sslotsky/validate-this.git"
+  },
+  "@pika/pack": {
+    "pipeline": [
+      [
+        "@pika/plugin-standard-pkg",
+        {
+          "exclude": [
+            "__spec/**/*"
+          ]
+        }
+      ],
+      [
+        "@pika/plugin-build-node"
+      ],
+      [
+        "@pika/plugin-build-web"
+      ]
+    ]
   },
   "nyc": {
     "exclude": [
@@ -37,12 +55,17 @@
     "customizable"
   ],
   "devDependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "@pika/pack": "^0.3.7",
+    "@pika/plugin-build-node": "^0.4.0",
+    "@pika/plugin-build-web": "^0.4.0",
+    "@pika/plugin-standard-pkg": "^0.4.0",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-0": "^6.16.0",
     "babel-register": "^6.18.0",
     "eslint": "^5.16.0",
     "eslint-plugin-import": "^2.2.0",
