@@ -1,9 +1,10 @@
 {
+  "plugins": ["prettier"],
+  "extends": ["plugin:prettier/recommended"],
   "parser": "babel-eslint",
   "rules": {
     "no-debugger": "error",
     "import/prefer-default-export": ["off"],
-    "semi": [2, "never"],
-    "comma-dangle": [2, "never"]
+    "prettier/prettier": "error"
   }
 }
