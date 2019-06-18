@@ -1,5 +1,19 @@
 language: node_js
 node_js:
   - "node"
+stages:
+  - test
+  - build
+jobs:
+  include:
+    - stage: test
+      name: "Linters"
+      script: npm run lint
+    - stage: test
+      name: "Unit tests"
+      script: npm run spec-coverage
+    - stage: build
+      name: "Compile the library"
+      script: npm run compile
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - npx codecov
