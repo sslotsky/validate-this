@@ -16,4 +16,4 @@ jobs:
       name: "Compile the library"
       script: npm run compile
 after_success:
-  - npx codecov
+  - bash <(curl -s https://codecov.io/bash)
