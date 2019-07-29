@@ -50,7 +50,7 @@
     "@pika/pack": "^0.3.7",
     "@pika/plugin-build-node": "^0.5.1",
     "@pika/plugin-build-web": "^0.5.1",
-    "@pika/plugin-standard-pkg": "^0.4.0",
+    "@pika/plugin-standard-pkg": "^0.5.1",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
     "babel-eslint": "^10.0.1",
