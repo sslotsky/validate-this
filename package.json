@@ -48,7 +48,7 @@
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/preset-stage-0": "^7.0.0",
     "@pika/pack": "^0.3.7",
-    "@pika/plugin-build-node": "^0.7.1",
+    "@pika/plugin-build-node": "^0.8.1",
     "@pika/plugin-build-web": "^0.8.1",
     "@pika/plugin-standard-pkg": "^0.8.1",
     "babel-cli": "^6.18.0",
